@@ -1,3 +1,19 @@
+// ফাইলের একদম শুরুতে (অন্য কিছুর আগে) যোগ করুন
+console.log('Starting server...');
+console.log('Environment variables loaded:', {
+  MONGO_URI: process.env.MONGO_URI ? '✅ exists' : '❌ missing',
+  JWT_SECRET: process.env.JWT_SECRET ? '✅ exists' : '❌ missing',
+  // বাকিগুলোও চেক করতে পারেন
+});
+
+// MongoDB কানেক্ট করার জায়গায় try-catch যোগ করুন
+try {
+  await connectDB();
+  console.log('✅ MongoDB Connected successfully');
+} catch (err) {
+  console.error('❌ MongoDB connection error:', err);
+  // এরর হলে প্রসেস বন্ধ না করে শুধু লগ করুন
+}
 require('dotenv').config();
 const express = require('express');
 const connectDB = require('./config/db');
